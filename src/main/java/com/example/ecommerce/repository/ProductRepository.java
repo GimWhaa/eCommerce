@@ -1,22 +1,22 @@
 package com.example.ecommerce.repository;
 
-import com.example.ecommerce.model.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
-/// Repository will get all the functionality from JPA
-/// JPA is a framework for persisting objects
-/// The first argument inside <> is the class and the second is the primary key
-public interface ProductRepository extends JpaRepository<Product, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    /// SELECT * FROM product WHERE name = ?
-    List<Product> findByName(String name);
+import com.example.ecommerce.model.Product;
 
-    /// SELECT * FROM product WHERE price BETWEEN ?1 AND ?2
-    List<Product> findByPriceBetween(Double min, Double price);
+// My repository will get all the functions from JpaRepository (extends) - Inheritance
+// The first argument inside <> will be your Entity name
+// The second argument inside <> will be the ID data type
+// The theory term is Generic ( can refer to book as well)
 
-    /// SELECT * FROM product WHERE price <= ?
-    List<Product> findByPriceLessThan(Double price);
+public interface ProductRepository extends JpaRepository<Product,Long>{
+	
+	// It knows I want to open up SELECT * FROM products WHERE name LIKE ''
+	List<Product> findByName(String name);
+	
+	// It will be mapped to SELECT * FROM products WHERE price <= 100
+	List<Product> findByPriceLessThanEqual(double price);
 
 }
